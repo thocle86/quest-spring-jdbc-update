@@ -16,11 +16,11 @@ public class WizardRepository {
     private final static String DB_USER = "h4rryp0tt3r";
     private final static String DB_PASSWORD = "Horcrux4life!";
 
-    public Wizard update(Long id, String firstName, String lastName, Date birthday,
-                         String birthPlace, String biography, boolean muggle) {
+    public Wizard update(Long id, String firstName, String lastName, Date birthday, String birthPlace, String biography, boolean muggle) {
 
         Connection connection = null;
         PreparedStatement statement = null;
+
         try {
             connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD
@@ -39,14 +39,14 @@ public class WizardRepository {
             if (statement.executeUpdate() != 1) {
                 throw new SQLException("failed to update data");
             }
-            return new Wizard(id, firstName, lastName, birthday,
-                    birthPlace, biography, muggle);
+            return new Wizard(id, firstName, lastName, birthday, birthPlace, biography, muggle);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             JdbcUtils.closeStatement(statement);
             JdbcUtils.closeConnection(connection);
         }
+        
         return null;
     }
 
